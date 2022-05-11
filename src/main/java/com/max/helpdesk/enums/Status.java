@@ -1,12 +1,12 @@
-package com.max.helpdesk.domain.enums;
+package com.max.helpdesk.enums;
 
-public enum Prioridade {
-    BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
+public enum Status {
+    ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
 
     private Integer codigo;
     private String descricao;
 
-    Prioridade(Integer codigo, String descricao) {
+    Status(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -27,15 +27,15 @@ public enum Prioridade {
         this.descricao = descricao;
     }
 
-    public static Prioridade toEnum(Integer codigo) {
+    public static Status toEnum(Integer codigo) {
         if (codigo == null) {
             return null;
         }
-        for (Prioridade prioridade: Prioridade.values()) {
-            if (codigo.equals(prioridade.getCodigo())) {
-                return prioridade;
+        for (Status status: Status.values()) {
+            if (codigo.equals(status.getCodigo())) {
+                return status;
             }
         }
-        throw new IllegalArgumentException("Prioridade Inválido");
+        throw new IllegalArgumentException("Status Inválido");
     }
 }

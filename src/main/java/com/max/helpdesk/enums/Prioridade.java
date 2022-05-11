@@ -1,12 +1,12 @@
-package com.max.helpdesk.domain.enums;
+package com.max.helpdesk.enums;
 
-public enum Perfil {
-    ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
+public enum Prioridade {
+    BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 
     private Integer codigo;
     private String descricao;
 
-    Perfil(Integer codigo, String descricao) {
+    Prioridade(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -27,15 +27,15 @@ public enum Perfil {
         this.descricao = descricao;
     }
 
-    public static Perfil toEnum(Integer codigo) {
+    public static Prioridade toEnum(Integer codigo) {
         if (codigo == null) {
             return null;
         }
-        for (Perfil perfil: Perfil.values()) {
-            if (codigo.equals(perfil.getCodigo())) {
-                return perfil;
+        for (Prioridade prioridade: Prioridade.values()) {
+            if (codigo.equals(prioridade.getCodigo())) {
+                return prioridade;
             }
         }
-        throw new IllegalArgumentException("Perfil Inválido");
+        throw new IllegalArgumentException("Prioridade Inválido");
     }
 }
