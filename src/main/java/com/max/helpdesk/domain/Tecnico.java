@@ -1,13 +1,26 @@
 package com.max.helpdesk.domain;
 
+import com.max.helpdesk.enums.Perfil;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tecnico extends Pessoa{
+@Entity
+public class Tecnico extends Pessoa implements Serializable {
+    @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
+        addPerfis(Perfil.TECNICO);
+    }
+
+    public Tecnico() {
+        super();
+        addPerfis(Perfil.TECNICO);
     }
 
     public List<Chamado> getChamados() {
