@@ -1,5 +1,6 @@
 package com.max.helpdesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.max.helpdesk.enums.Perfil;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Cliente extends Pessoa implements Serializable {
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Chamado> chamados = new ArrayList<>();
 
