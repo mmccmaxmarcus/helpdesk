@@ -1,7 +1,7 @@
 package com.max.helpdesk.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.max.helpdesk.domain.Tecnico;
+import com.max.helpdesk.domain.Cliente;
 import com.max.helpdesk.enums.Perfil;
 
 import javax.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TecnicoDto implements Serializable {
+public class ClienteDto implements Serializable {
     private Integer id;
     @NotNull(message = "O campo NOME é requerido")
     private String nome;
@@ -25,17 +25,17 @@ public class TecnicoDto implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCriacao = LocalDate.now();
 
-    public TecnicoDto(Tecnico tecnico) {
-        this.id = tecnico.getId();
-        this.nome = tecnico.getNome();
-        this.cpf = tecnico.getCpf();
-        this.email = tecnico.getEmail();
-        this.senha = tecnico.getSenha();
-        this.perfis = tecnico.getPerfis().stream().map(perfil -> perfil.getCodigo()).collect(Collectors.toSet());
-        this.dataCriacao = tecnico.getDataCriacao();
+    public ClienteDto(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.cpf = cliente.getCpf();
+        this.email = cliente.getEmail();
+        this.senha = cliente.getSenha();
+        this.perfis = cliente.getPerfis().stream().map(perfil -> perfil.getCodigo()).collect(Collectors.toSet());
+        this.dataCriacao = cliente.getDataCriacao();
     }
 
-    public TecnicoDto() {
+    public ClienteDto() {
         // setPerfis(Perfil.CLIENTE);
     }
 
