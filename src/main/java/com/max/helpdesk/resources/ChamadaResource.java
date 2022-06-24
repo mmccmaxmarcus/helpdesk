@@ -32,12 +32,18 @@ public class ChamadaResource {
     }
 
     @PostMapping
-    public ResponseEntity<ChamadoDto> create(@Valid @RequestBody ChamadoDto chamadoDto){
+    public ResponseEntity<ChamadoDto> create(@Valid @RequestBody ChamadoDto chamadoDto) {
         Chamado chamado = chamadaService.create(chamadoDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(chamado.getId()).toUri();
         return ResponseEntity.created(uri).build();
 
+    }
+
+    @PutMapping(value = "{id}")
+    public ResponseEntity<ChamadoDto> update(@PathVariable Integer id, @Valid @RequestBody ChamadoDto chamadoDto) {
+        Chamado chamado = chamadaService.update(id, chamadoDto);
+        return ResponseEntity.ok().body(new ChamadoDto(chamado));
     }
 
 }

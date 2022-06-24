@@ -5,6 +5,7 @@ import com.max.helpdesk.domain.dto.TecnicoDto;
 import com.max.helpdesk.services.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,18 +29,20 @@ public class TecnicoResource {
     public ResponseEntity<List<TecnicoDto>> findAll() {
         return ResponseEntity.ok(tecnicoService.findAll());
     }
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TecnicoDto> create(@Valid @RequestBody TecnicoDto tecnicoDto) {
         Tecnico tecnico = tecnicoService.create(tecnicoDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tecnico.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
     public ResponseEntity<TecnicoDto> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDto tecnicoDto) {
         Tecnico tecnico = tecnicoService.update(id, tecnicoDto);
         return ResponseEntity.ok().body(new TecnicoDto(tecnico));
     }
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<TecnicoDto> delete(@PathVariable Integer id) {
         tecnicoService.delete(id);
